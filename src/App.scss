@@ -1,4 +1,26 @@
 body {
   margin: 0;
   font-family: 'Montserrat', sans-serif;
+
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.h1 {
+  font-size: 48px;
+  text-align: center;
+}
+
+.todolist-body {
+    background-color: powderblue;
+
+    width: 40vw;
+    min-height: 50vh;
+    max-height: 90vh;
+
+    padding: 40px;
+    border-radius: 50px;
 }

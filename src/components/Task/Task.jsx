@@ -1,23 +1,18 @@
 import styles from './Task.module.scss'
-import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 export const Task = (props) => {
 
-  const [name, setName] = useState(props.task);
-  const onSubmit = (e) => {
-    e.preventDefault()
-  }
-
   return (
-    <form className={styles.row} onSubmit={onSubmit}>
+    <li className={styles.row}>
       <label>
         <input type='checkbox' />
       </label>
 
-      <input type='text' />
+      <div>Title</div>
 
-      <button type='button'>edit</button>
+      <Link to='/edit'>edit</Link>
       <button type='button'>delete</button>
-    </form>
+    </li>
   )
 }

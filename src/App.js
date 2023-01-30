@@ -1,8 +1,10 @@
 import './App.scss'
 import { Suspense } from 'react';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { List } from './pages/List';
-import { AddTaskForm } from './components/AddTask/AddTask';
+import { Add } from './pages/Add';
+import { Edit } from './pages/Edit';
+import { Trash } from './pages/Trash';
 
 const App = () => {
 
@@ -14,12 +16,12 @@ const App = () => {
 
           <h1 className='h1'>Easy tasks</h1>
 
-          <Link to="/add">Add a new task</Link>
-
           <Suspense fallback="Loading...">
             <Routes>
               <Route path='/' element={<List/>} />
-              <Route path='/add' element={<AddTaskForm/>} />
+              <Route path='/add' element={<Add/>} />
+              <Route path='/edit' element={<Edit/>} />
+              <Route path='/Trash' element={<Trash/>} />
             </Routes>
           </Suspense>
           

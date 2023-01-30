@@ -1,25 +1,30 @@
 import './App.scss'
-import { AddTaskForm } from './AddTask/AddTask'
-import { Task } from './Task/Task';
-import { TaskList } from './TaskList/TaskList';
+import { Suspense } from 'react';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { List } from './pages/List';
+import { AddTaskForm } from './components/AddTask/AddTask';
 
 const App = () => {
 
   return (
 
-    <div className="todolist-body">
+    <BrowserRouter>
 
-      <h1 className='h1'>Easy tasks</h1>
+        <div className="todolist-body">
 
-      <AddTaskForm/>
+          <h1 className='h1'>Easy tasks</h1>
 
-      <TaskList>
-        <Task />
-        <Task />
-        <Task />
-      </TaskList>
-      
-    </div>
+          <Link to="/add">Add a new task</Link>
+
+          <Suspense fallback="Loading...">
+            <Routes>
+              <Route path='/' element={<List/>} />
+              <Route path='/add' element={<AddTaskForm/>} />
+            </Routes>
+          </Suspense>
+          
+        </div>
+    </BrowserRouter>
     
   );
 }

@@ -1,5 +1,8 @@
 export const Edit = () => {
   return (
-    <div>Edit</div>
+    <>
+      <div>Edit</div>
+      <input type='date' />
+    </>
   )
 }

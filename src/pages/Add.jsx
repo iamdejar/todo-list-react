@@ -4,7 +4,7 @@ import { AddTaskForm } from "../components/AddTask/AddTask"
 export const Add = () => {
   return (
     <>
-      <Link to='/'>Назад</Link>
+      <Link to='/' className='button'>Назад</Link>
       <AddTaskForm />
     </>
   )

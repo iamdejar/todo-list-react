@@ -10,9 +10,12 @@ export const TaskList = (props) => {
     // .filter(FILTER_FUNCTIONS[activeFilter])
     .map((task) => (
       <Task 
-        name={task.name} 
         id={task.id} 
         key={task.id}
+        title={task.title} 
+        desc={task.description}
+        start={task.start}
+        end={task.end}
         completed={task.completed}
       />
     ));

@@ -1,5 +1,29 @@
 .row {
   display: grid;
-  grid-template-columns: 20px 1fr 40px 50px;
+  align-items: center;
+  grid-template-columns: 1fr repeat(2, 130px) repeat(2, 80px);
   gap: 10px;
+}
+
+.label {
+  display: flex;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.title {
+  font-size: 22px;
+}
+
+.date {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 5px;
+
+  height: 100%;
+}
+
+.description {
+  padding-left: 23px;
 }

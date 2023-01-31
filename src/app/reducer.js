@@ -5,15 +5,27 @@ export const tasksSlice = createSlice({
   name: 'tasks',
   initialState: {
     tasks: [
-      { id: 1, name: 'One', completed: false },
-      { id: 2, name: 'Two', completed: false },
-      { id: 3, name: 'Three', completed: false },
+      { id: 1, title: 'One', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', start: '2023-02-10', end: '5 фев 2022 г.', completed: false, deleted: false },
+
+      { id: 2, title: 'Two', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', start: '2023-02-10', end: '5 фев 2022 г.', completed: false, deleted: false },
+
+      { id: 3, title: 'Three', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', start: '2023-02-10', end: '5 фев 2022 г.', completed: false, deleted: false },
+
     ]
   },
   reducers: {
     addTask: (state, action) => {
+      const newId = state.tasks.length + 1;
+      let newTask = {
+        id: newId, 
+        title: action.payload.title, 
+        description: action.payload.desk, 
+        start: action.payload.start, 
+        end: action.payload.end, 
+        completed: false, 
+        deleted: false 
+      };
 
-      let newTask = {id: 1, name: action.payload, completed: false};
       state.tasks.push(newTask);
     },
     editTask: (state, action) => {

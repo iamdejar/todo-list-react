@@ -1,23 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+import { nanoid } from "nanoid";
 
 export const tasksSlice = createSlice({
   name: 'tasks',
   initialState: {
     tasks: [
-      { id: 1, title: 'One', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', start: '2023-02-10', end: '5 фев 2022 г.', completed: false, deleted: false },
+      { id: nanoid(), title: 'One', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', start: '2023-02-10', end: '2023-02-10', completed: false, deleted: false },
 
-      { id: 2, title: 'Two', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', start: '2023-02-10', end: '5 фев 2022 г.', completed: false, deleted: false },
+      { id: nanoid(), title: 'Two', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', start: '2023-02-10', end: '2023-02-10', completed: false, deleted: false },
 
-      { id: 3, title: 'Three', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', start: '2023-02-10', end: '5 фев 2022 г.', completed: false, deleted: false },
+      { id: nanoid(), title: 'Three', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', start: '2023-02-10', end: '2023-02-10', completed: false, deleted: false },
 
     ]
   },
   reducers: {
     addTask: (state, action) => {
-      const newId = state.tasks.length + 1;
       let newTask = {
-        id: newId, 
+        id: nanoid(), 
         title: action.payload.title, 
         description: action.payload.desk, 
         start: action.payload.start, 
@@ -32,7 +31,12 @@ export const tasksSlice = createSlice({
 
       state.tasks = state.tasks.map(task => {
         if (action.payload.id === task.id) {
-          return {...task, title: action.payload.newTitle}
+          return {...task, 
+            title: action.payload.title,
+            description: action.payload.desk,
+            start: action.payload.start,
+            end: action.payload.end,
+          }
         }
         return task
       })

@@ -1,15 +1,15 @@
 import styles from './AddTask.module.scss';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { addTask } from '../../app/reducer';
 
-export const AddTaskForm = () => {
+export const AddTaskForm = (props) => {
 
   const dispatch = useDispatch();
-  const [titleValue, setTitleValue] = useState('');
-  const [descValue, setDescValue] = useState('');
-  const [startValue, setStartValue] = useState('');
-  const [endValue, setEndValue] = useState('');
+
+  const [titleValue, setTitleValue] = useState(props.toedit.title || '');
+  const [descValue, setDescValue] = useState(props.toedit.description || '');
+  const [startValue, setStartValue] = useState(props.toedit.start || '');
+  const [endValue, setEndValue] = useState(props.toedit.end || '');
 
   const onTitleChange = (e) => {
     setTitleValue(e.target.value);
@@ -27,10 +27,9 @@ export const AddTaskForm = () => {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    console.log(titleValue, descValue, startValue, endValue);
-
     if (titleValue.length) {
-      dispatch(addTask({
+      dispatch(props.action({
+        id: props.toedit.id,
         title: titleValue, 
         desk: descValue,
         start: startValue,
@@ -79,7 +78,7 @@ export const AddTaskForm = () => {
         placeholder='End'
       />
 
-      <input type='submit' value='Add' className='button'/>
+      <input type='submit' value='Save' className='button'/>
     </form>
   )
 }

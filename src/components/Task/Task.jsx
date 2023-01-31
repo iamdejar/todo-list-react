@@ -1,4 +1,5 @@
 import styles from './Task.module.scss';
+import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { completeTask, deleteTask } from '../../app/reducer';
@@ -11,10 +12,19 @@ export const Task = (props) => {
 
   const dispatch = useDispatch();
 
+  const onChange = () => {
+    dispatch(completeTask(props.id))
+  }
+
   return (
-    <li className={styles.row}>
+    <li className={classNames(styles.row, props.deleted === true ? styles.deleted : null)}>
       <label className={styles.label}>
-        <input type='checkbox' onChange={() => dispatch(completeTask(props.id))}/>
+        <input 
+          type='checkbox' 
+          id={props.id} 
+          key={props.id}
+          checked={props.completed === true ? true : false}
+          onChange={onChange}/>
 
         <div className={styles.title}>{props.title}</div>
       </label>
@@ -25,14 +35,19 @@ export const Task = (props) => {
       </div>
       <div className={styles.date}>
         <strong>End</strong>
-        <span>{dayjs(props.start).format('D MMM YYYY')} г.</span>
+        <span>{dayjs(props.end).format('D MMM YYYY')} г.</span>
       </div>
 
       <Link to='/task' className='button' state={{ id: props.id }}>edit</Link>
       <button 
         type='button'
         className='button' 
-        onClick={() => dispatch(deleteTask(props.id))}>
+        onClick={() => {
+          const isDelete = window.confirm('Вы действительно хотите удалить задачу?');
+          if (isDelete === true) {
+            dispatch(deleteTask(props.id)) 
+          }
+        }}>
           delete
         </button>
 

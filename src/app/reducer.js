@@ -9,33 +9,31 @@ export const tasksSlice = createSlice({
         id: nanoid(), 
         title: 'One', 
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 
-        start: '2023-02-10', 
+        start: '2023-01-10', 
         end: '2023-02-10', 
         completed: false, 
         deleted: false 
       },
-
       { 
         id: nanoid(), 
         title: 'Two', 
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 
-        start: '2023-02-10', 
-        end: '2023-02-10', 
+        start: '2023-01-20', 
+        end: '2023-02-05', 
         completed: false, 
         deleted: false 
       },
-
       { 
         id: nanoid(), 
         title: 'Three', 
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 
-        start: '2023-02-10', 
-        end: '2023-02-10', 
+        start: '2023-01-30', 
+        end: '2023-02-01', 
         completed: false, 
         deleted: false 
       },
-
-    ]
+    ],
+    activeFilter: 'All'
   },
   reducers: {
     addTask: (state, action) => {
@@ -79,11 +77,21 @@ export const tasksSlice = createSlice({
     },
 
     deleteTask: (state, action) => {
-      state.tasks = state.tasks.filter((task) => action.payload !== task.id)
+      state.tasks = state.tasks.map(task => {
+
+        if (action.payload === task.id) {
+          return {...task, deleted: true }
+        }
+        return task
+      })
+    },
+
+    setFilter: (state, action) => {
+      state.activeFilter = action.payload
     }
   }
   
 })
 
-export const { addTask, editTask, completeTask, deleteTask } = tasksSlice.actions;
+export const { addTask, editTask, completeTask, deleteTask, setFilter } = tasksSlice.actions;
 export default tasksSlice.reducer;

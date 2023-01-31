@@ -3,6 +3,10 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
+const dayjs = require('dayjs');
+require('dayjs/locale/ru');
+dayjs.locale('ru')
+
 export const TaskForm = (props) => {
 
   const dispatch = useDispatch();
@@ -28,6 +32,7 @@ export const TaskForm = (props) => {
     setDescValue(e.target.value);
   }
   const onStartDateChange = (e) => {
+    console.log(dayjs(startValue).unix());
     setStartValue(e.target.value);
   }
   const onEndDateChange = (e) => {
@@ -89,16 +94,14 @@ export const TaskForm = (props) => {
       <input 
         type="date" 
         className={styles.inputDate} 
-        value={startValue} 
+        value={dayjs(startValue).format('YYYY-MM-DD')} 
         onChange={onStartDateChange}
-        placeholder='Start'
       />
       <input 
         type="date" 
         className={styles.inputDate} 
-        value={endValue} 
+        value={dayjs(endValue).format('YYYY-MM-DD')} 
         onChange={onEndDateChange}
-        placeholder='End'
       />
 
       <input type='submit' value='Save' className='button'/>

@@ -1,0 +1,30 @@
+.row {
+  margin: 20px 0;
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr repeat(2, 130px) repeat(2, 90px);
+  gap: 10px;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.item {
+  width: fit-content;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid royalblue;
+  background: #fff;
+
+  color: #000;
+  text-decoration: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 16px;
+}

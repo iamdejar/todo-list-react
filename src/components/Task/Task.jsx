@@ -28,7 +28,7 @@ export const Task = (props) => {
         <span>{dayjs(props.start).format('D MMM YYYY')} г.</span>
       </div>
 
-      <Link to='/edit' className='button' state={{ id: props.id }}>edit</Link>
+      <Link to='/task' className='button' state={{ id: props.id }}>edit</Link>
       <button 
         type='button'
         className='button' 

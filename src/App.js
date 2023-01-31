@@ -2,8 +2,7 @@ import './App.scss'
 import { Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { List } from './pages/List';
-import { Add } from './pages/Add';
-import { Edit } from './pages/Edit';
+import { DetailTask } from './pages/Detail';
 import { Trash } from './pages/Trash';
 
 const App = () => {
@@ -19,9 +18,8 @@ const App = () => {
           <Suspense fallback="Loading...">
             <Routes>
               <Route path='/' element={<List/>} />
-              <Route path='/add' element={<Add/>} />
-              <Route path='/edit' element={<Edit/>} />
-              <Route path='/Trash' element={<Trash/>} />
+              <Route path='/task' element={<DetailTask/>} />
+              <Route path='/trash' element={<Trash/>} />
             </Routes>
           </Suspense>
           

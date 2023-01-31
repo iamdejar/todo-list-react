@@ -5,11 +5,35 @@ export const tasksSlice = createSlice({
   name: 'tasks',
   initialState: {
     tasks: [
-      { id: nanoid(), title: 'One', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', start: '2023-02-10', end: '2023-02-10', completed: false, deleted: false },
+      { 
+        id: nanoid(), 
+        title: 'One', 
+        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 
+        start: '2023-02-10', 
+        end: '2023-02-10', 
+        completed: false, 
+        deleted: false 
+      },
 
-      { id: nanoid(), title: 'Two', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', start: '2023-02-10', end: '2023-02-10', completed: false, deleted: false },
+      { 
+        id: nanoid(), 
+        title: 'Two', 
+        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 
+        start: '2023-02-10', 
+        end: '2023-02-10', 
+        completed: false, 
+        deleted: false 
+      },
 
-      { id: nanoid(), title: 'Three', description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', start: '2023-02-10', end: '2023-02-10', completed: false, deleted: false },
+      { 
+        id: nanoid(), 
+        title: 'Three', 
+        description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 
+        start: '2023-02-10', 
+        end: '2023-02-10', 
+        completed: false, 
+        deleted: false 
+      },
 
     ]
   },

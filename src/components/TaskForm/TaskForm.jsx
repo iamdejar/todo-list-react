@@ -1,15 +1,25 @@
-import styles from './AddTask.module.scss';
+import styles from './TaskForm.module.scss';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-export const AddTaskForm = (props) => {
+export const TaskForm = (props) => {
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const [titleValue, setTitleValue] = useState(props.toedit.title || '');
-  const [descValue, setDescValue] = useState(props.toedit.description || '');
-  const [startValue, setStartValue] = useState(props.toedit.start || '');
-  const [endValue, setEndValue] = useState(props.toedit.end || '');
+  const [titleValue, setTitleValue] = useState(
+    props.toedit === undefined ? '' : props.toedit.title
+  );
+  const [descValue, setDescValue] = useState(
+    props.toedit === undefined ? '' : props.toedit.description
+  );
+  const [startValue, setStartValue] = useState(
+    props.toedit === undefined ? '' : props.toedit.start
+  );
+  const [endValue, setEndValue] = useState(
+    props.toedit === undefined ? '' : props.toedit.end
+  );
 
   const onTitleChange = (e) => {
     setTitleValue(e.target.value);
@@ -28,18 +38,31 @@ export const AddTaskForm = (props) => {
     e.preventDefault();
 
     if (titleValue.length) {
-      dispatch(props.action({
-        id: props.toedit.id,
-        title: titleValue, 
-        desk: descValue,
-        start: startValue,
-        end: endValue,
-      }));
+
+      if (props.toedit === undefined) {
+        dispatch(props.action({
+          title: titleValue, 
+          desk: descValue,
+          start: startValue,
+          end: endValue,
+        }));
+      } else {
+        dispatch(props.action({
+          id: props.toedit.id,
+          title: titleValue, 
+          desk: descValue,
+          start: startValue,
+          end: endValue,
+        }));
+      }
+      
 
       setTitleValue('');
       setDescValue('');
       setStartValue('');
       setEndValue('');
+
+      navigate('/');
     }
   }
 

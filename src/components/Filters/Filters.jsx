@@ -79,6 +79,7 @@ export const Filters = () => {
             type='text' 
             value={filterState.titleValue}
             onChange={onTitleChange}
+            placeholder='Title'
           />
         </label>
 

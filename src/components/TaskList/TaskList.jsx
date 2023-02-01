@@ -80,6 +80,7 @@ export const TaskList = () => {
           {tasksToRender}
     
         </ul>
+        {tasksWithPagination.length === filteredTasks.length ? <div className={styles.listEnd}>Конец списка</div> : null}
       </>
     )
   }

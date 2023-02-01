@@ -31,11 +31,11 @@ export const Task = (props) => {
 
       <div className={styles.date}>
         <strong>Start</strong>
-        <span>{dayjs(props.start).format('D MMM YYYY')} г.</span>
+        <span>{dayjs.unix(props.start).format('D MMM YYYY')} г.</span>
       </div>
       <div className={styles.date}>
         <strong>End</strong>
-        <span>{dayjs(props.end).format('D MMM YYYY')} г.</span>
+        <span>{dayjs.unix(props.end).format('D MMM YYYY')} г.</span>
       </div>
 
       <Link to='/task' className='button' state={{ id: props.id }}>edit</Link>

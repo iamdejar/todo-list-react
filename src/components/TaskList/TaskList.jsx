@@ -11,8 +11,14 @@ export const TaskList = (props) => {
     'All': state.tasks.filter(() => true),
     'Active': state.tasks.filter((task) => !task.completed),
     'Completed': state.tasks.filter((task) => task.completed),
-    'start-ascending': sortArr.sort((a, b) => a.start - b.start),
-    'start-descending': sortArr.sort((a, b) => a.start - b.start).reverse(),
+    startAscending: sortArr.sort((a, b) => {
+      console.log(Number(a.start), Number(b.start));
+      return Number(a.start) - Number(b.start)}),
+    startDescending: sortArr.sort((a, b) => Number(a.start) - Number(b.start)).reverse(),
+    'end-ascending': sortArr.sort((a, b) => a.end - b.end),
+    'end-descending': sortArr.sort((a, b) => a.end - b.end).reverse(),
+    'start-default': state.tasks.filter(() => true),
+    'end-default': state.tasks.filter(() => true),
   }
 
   const tasksToRender = FILTER_FUNCTIONS[state.activeFilter]

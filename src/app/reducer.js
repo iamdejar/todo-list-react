@@ -9,8 +9,8 @@ export const tasksSlice = createSlice({
         id: nanoid(), 
         title: 'One', 
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 
-        start: '2023-01-10', 
-        end: '2023-02-10', 
+        start: '1673298000', 
+        end: '1675976400', 
         completed: false, 
         deleted: false 
       },
@@ -18,8 +18,8 @@ export const tasksSlice = createSlice({
         id: nanoid(), 
         title: 'Two', 
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 
-        start: '2023-01-20', 
-        end: '2023-02-05', 
+        start: '1674162000', 
+        end: '1675544400', 
         completed: false, 
         deleted: false 
       },
@@ -27,8 +27,8 @@ export const tasksSlice = createSlice({
         id: nanoid(), 
         title: 'Three', 
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 
-        start: '2023-01-30', 
-        end: '2023-02-01', 
+        start: '1675026000', 
+        end: '1675198800', 
         completed: false, 
         deleted: false 
       },

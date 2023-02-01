@@ -34,8 +34,8 @@ export const Filters = () => {
         onChange={(e) => dispatch(setFilter(e.target.value))}
       >
         <option value='start-default'>Default</option>
-        <option value='start-ascending'>Ascending</option>
-        <option value='start-descending'>Descending</option>
+        <option value='startAscending'>Ascending</option>
+        <option value='startDescending'>Descending</option>
       </select>
 
       <select 

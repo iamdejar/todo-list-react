@@ -32,7 +32,6 @@ export const TaskForm = (props) => {
     setDescValue(e.target.value);
   }
   const onStartDateChange = (e) => {
-    console.log(dayjs(startValue).unix());
     setStartValue(e.target.value);
   }
   const onEndDateChange = (e) => {
@@ -48,16 +47,16 @@ export const TaskForm = (props) => {
         dispatch(props.action({
           title: titleValue, 
           desk: descValue,
-          start: startValue,
-          end: endValue,
+          start: dayjs(startValue).unix(),
+          end: dayjs(endValue).unix(),
         }));
       } else {
         dispatch(props.action({
           id: props.toedit.id,
           title: titleValue, 
           desk: descValue,
-          start: startValue,
-          end: endValue,
+          start: dayjs(startValue).unix(),
+          end: dayjs(endValue).unix(),
         }));
       }
       

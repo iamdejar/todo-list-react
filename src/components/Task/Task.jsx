@@ -6,7 +6,7 @@ import { completeTask, deleteTask } from '../../app/reducer';
 
 const dayjs = require('dayjs');
 require('dayjs/locale/ru');
-dayjs.locale('ru')
+dayjs.locale('ru');
 
 export const Task = (props) => {
 
@@ -31,11 +31,11 @@ export const Task = (props) => {
 
       <div className={styles.date}>
         <strong>Start</strong>
-        <span>{dayjs.unix(props.start).format('D MMM YYYY')} г.</span>
+        <span>{props.start.format('D MMM YYYY')} г.</span>
       </div>
       <div className={styles.date}>
         <strong>End</strong>
-        <span>{dayjs.unix(props.end).format('D MMM YYYY')} г.</span>
+        <span>{props.end.format('D MMM YYYY')} г.</span>
       </div>
 
       <Link to='/task' className='button' state={{ id: props.id }}>edit</Link>

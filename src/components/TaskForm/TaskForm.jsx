@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 const dayjs = require('dayjs');
 require('dayjs/locale/ru');
-dayjs.locale('ru')
+dayjs.locale('ru');
 
 export const TaskForm = (props) => {
 
@@ -47,16 +47,16 @@ export const TaskForm = (props) => {
         dispatch(props.action({
           title: titleValue, 
           desk: descValue,
-          start: dayjs(startValue).unix(),
-          end: dayjs(endValue).unix(),
+          start: dayjs(startValue),
+          end: dayjs(endValue),
         }));
       } else {
         dispatch(props.action({
           id: props.toedit.id,
           title: titleValue, 
           desk: descValue,
-          start: dayjs(startValue).unix(),
-          end: dayjs(endValue).unix(),
+          start: dayjs(startValue),
+          end: dayjs(endValue),
         }));
       }
       

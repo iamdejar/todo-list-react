@@ -1,6 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { nanoid } from "nanoid";
 
+const dayjs = require('dayjs');
+require('dayjs/locale/ru');
+dayjs.locale('ru');
+
 export const tasksSlice = createSlice({
   name: 'tasks',
   initialState: {
@@ -9,8 +13,8 @@ export const tasksSlice = createSlice({
         id: nanoid(), 
         title: 'One', 
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 
-        start: '1673298000', 
-        end: '1675976400', 
+        start: dayjs('2023-01-10'), 
+        end: dayjs('2023-02-10'), 
         completed: false, 
         deleted: false 
       },
@@ -18,8 +22,8 @@ export const tasksSlice = createSlice({
         id: nanoid(), 
         title: 'Two', 
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 
-        start: '1674162000', 
-        end: '1675544400', 
+        start: dayjs('2023-01-20'), 
+        end: dayjs('2023-02-05'), 
         completed: false, 
         deleted: false 
       },
@@ -27,15 +31,17 @@ export const tasksSlice = createSlice({
         id: nanoid(), 
         title: 'Three', 
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 
-        start: '1675026000', 
-        end: '1675198800', 
+        start: dayjs('2023-01-30'), 
+        end: dayjs('2023-02-01'), 
         completed: false, 
         deleted: false 
       },
     ],
     activeFilter: {
       filter: 'All',
-      value: '',
+      titleValue: '',
+      startDateValue: '',
+      endDateValue: '',
     }
   },
   reducers: {
@@ -91,7 +97,9 @@ export const tasksSlice = createSlice({
 
     setFilter: (state, action) => {
       state.activeFilter.filter = action.payload.filter;
-      state.activeFilter.value = action.payload.value;
+      state.activeFilter.titleValue = action.payload.titleValue;
+      state.activeFilter.startDateValue = action.payload.startDateValue;
+      state.activeFilter.endDateValue = action.payload.endDateValue;
     }
   }
   

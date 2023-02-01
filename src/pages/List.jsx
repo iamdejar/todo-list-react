@@ -6,7 +6,7 @@ export const List = () => {
 
   return (
     <>
-    <div className='space-between'>
+    <div className='top-buttons'>
       <Link to="/task" className='button'>Add a new task</Link>
       <Link to="/trash" className='button'>View deleted tasks</Link>
     </div>

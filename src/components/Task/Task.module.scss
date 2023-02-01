@@ -1,8 +1,18 @@
 .row {
   display: grid;
   align-items: center;
-  grid-template-columns: 1fr repeat(2, 130px) repeat(2, 90px);
-  gap: 10px;
+  
+  gap: 20px;
+  grid-template-columns: repeat(2, 1fr);
+
+  padding: 20px;
+  border: 1px solid;
+  border-radius: 20px;
+  
+  @media (min-width: 1024px) {
+    grid-template-columns: 1fr repeat(2, 130px) repeat(2, 90px);
+    gap: 10px;
+  }
 
   &.deleted {
     pointer-events: none;
@@ -11,6 +21,10 @@
 
   a, button {
     width: 100%;
+
+    @media (max-width: 1023px) {
+      order: 2;
+    }
   }
 }
 
@@ -18,6 +32,10 @@
   display: flex;
   gap: 10px;
   cursor: pointer;
+
+  @media (max-width: 1023px) {
+    grid-column: 1 / 3;
+  }
 }
 
 .title {
@@ -31,8 +49,18 @@
   gap: 5px;
 
   height: 100%;
+
+  @media (max-width: 1023px) {
+    order: 1;
+  }
 }
 
-.description {
-  padding-left: 23px;
+.description {  
+
+  @media (max-width: 1023px) {
+    grid-column: 1 / 3;
+  }
+  @media (min-width: 1023px) {
+    padding-left: 23px;
+  }
 }

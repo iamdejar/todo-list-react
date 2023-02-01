@@ -1,6 +1,8 @@
 import styles from './TaskList.module.scss';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Task } from '../Task/Task';
+import { useEffect, useState } from 'react';
+import { loadTasks } from '../../app/reducer';
 
 const dayjs = require('dayjs');
 require('dayjs/locale/ru');
@@ -11,7 +13,30 @@ dayjs.extend(isSameOrAfter);
 
 export const TaskList = () => {
 
+  const dispatch = useDispatch();
   const state = useSelector(state => state.tasks);
+  const [loading, setLoading] = useState(false);
+
+  const scrollHandler = (e) => {
+    const scrollBottom = e.target.documentElement.scrollHeight - e.target.documentElement.scrollTop - window.innerHeight;
+
+    if (scrollBottom < 50) {
+      setLoading('true')
+    }
+  }
+
+  useEffect(() => {
+    if (loading) {
+      dispatch(loadTasks('load'))
+    }
+  }, [loading])
+
+  useEffect(() => {
+    document.addEventListener('scroll', scrollHandler)
+    return () => {
+      document.removeEventListener('scroll', scrollHandler)
+    }
+  })
 
   const FILTER_FUNCTIONS = {
     All: state.tasks.filter((task) => !task.deleted),
@@ -32,6 +57,7 @@ export const TaskList = () => {
   const filteredTasks = FILTER_FUNCTIONS[state.activeFilter.filter];
 
   const tasksToRender = filteredTasks
+    .filter((task, index) => index < state.pagination)
     .map((task) => (
       <Task 
         id={task.id} 
@@ -47,11 +73,14 @@ export const TaskList = () => {
 
   if (filteredTasks.length > 0) {
     return (
-      <ul className={styles.list}>
-  
-        {tasksToRender}
-  
-      </ul>
+      <>
+        <div>Showing {state.pagination} / {state.tasks.length} tasks</div>
+        <ul className={styles.list}>
+    
+          {tasksToRender}
+    
+        </ul>
+      </>
     )
   }
 

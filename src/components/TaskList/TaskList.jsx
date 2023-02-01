@@ -9,20 +9,29 @@ dayjs.locale('ru');
 const isSameOrAfter = require('dayjs/plugin/isSameOrAfter');
 dayjs.extend(isSameOrAfter);
 
-export const TaskList = (props) => {
+export const TaskList = () => {
 
   const state = useSelector(state => state.tasks);
 
   const FILTER_FUNCTIONS = {
-    All: state.tasks.filter(() => true),
+    All: state.tasks.filter((task) => !task.deleted),
+
     Active: state.tasks.filter((task) => !task.completed),
+
     Completed: state.tasks.filter((task) => task.completed),
+
     Title: state.tasks.filter((task) => task.title.toLowerCase().startsWith(state.activeFilter.titleValue)),
-    StartDate: state.tasks.filter((task) => task.start.isSameOrAfter(state.activeFilter.startDateValue)),
-    EndDate: state.tasks.filter((task) => task.end.isSameOrAfter(state.activeFilter.endDateValue)),
+
+    StartDate: state.tasks.filter((task) => dayjs(task.start).isSameOrAfter(state.activeFilter.startDateValue)),
+
+    EndDate: state.tasks.filter((task) => dayjs(task.end).isSameOrAfter(state.activeFilter.endDateValue)),
+
+    Deleted: state.tasks.filter((task) => task.deleted),
   }
 
-  const tasksToRender = FILTER_FUNCTIONS[state.activeFilter.filter]
+  const filteredTasks = FILTER_FUNCTIONS[state.activeFilter.filter];
+
+  const tasksToRender = filteredTasks
     .map((task) => (
       <Task 
         id={task.id} 
@@ -32,14 +41,21 @@ export const TaskList = (props) => {
         start={task.start}
         end={task.end}
         completed={task.completed}
+        deleted={task.deleted}
       />
     ));
 
+  if (filteredTasks.length > 0) {
+    return (
+      <ul className={styles.list}>
+  
+        {tasksToRender}
+  
+      </ul>
+    )
+  }
+
   return (
-    <ul className={styles.list}>
-
-      {tasksToRender}
-
-    </ul>
+    <div>There's nothing here...</div>
   )
 }

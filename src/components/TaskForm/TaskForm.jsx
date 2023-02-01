@@ -3,10 +3,6 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-const dayjs = require('dayjs');
-require('dayjs/locale/ru');
-dayjs.locale('ru');
-
 export const TaskForm = (props) => {
 
   const dispatch = useDispatch();
@@ -47,16 +43,16 @@ export const TaskForm = (props) => {
         dispatch(props.action({
           title: titleValue, 
           desk: descValue,
-          start: dayjs(startValue),
-          end: dayjs(endValue),
+          start: startValue,
+          end: endValue,
         }));
       } else {
         dispatch(props.action({
           id: props.toedit.id,
           title: titleValue, 
           desk: descValue,
-          start: dayjs(startValue),
-          end: dayjs(endValue),
+          start: startValue,
+          end: endValue,
         }));
       }
       
@@ -93,13 +89,13 @@ export const TaskForm = (props) => {
       <input 
         type="date" 
         className={styles.inputDate} 
-        value={dayjs(startValue).format('YYYY-MM-DD')} 
+        value={startValue} 
         onChange={onStartDateChange}
       />
       <input 
         type="date" 
         className={styles.inputDate} 
-        value={dayjs(endValue).format('YYYY-MM-DD')} 
+        value={endValue} 
         onChange={onEndDateChange}
       />
 

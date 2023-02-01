@@ -1,10 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { nanoid } from "nanoid";
 
-const dayjs = require('dayjs');
-require('dayjs/locale/ru');
-dayjs.locale('ru');
-
 export const tasksSlice = createSlice({
   name: 'tasks',
   initialState: {
@@ -13,8 +9,8 @@ export const tasksSlice = createSlice({
         id: nanoid(), 
         title: 'One', 
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 
-        start: dayjs('2023-01-10'), 
-        end: dayjs('2023-02-10'), 
+        start: '2023-01-10', 
+        end: '2023-02-10', 
         completed: false, 
         deleted: false 
       },
@@ -22,8 +18,8 @@ export const tasksSlice = createSlice({
         id: nanoid(), 
         title: 'Two', 
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 
-        start: dayjs('2023-01-20'), 
-        end: dayjs('2023-02-05'), 
+        start: '2023-01-20', 
+        end: '2023-02-05', 
         completed: false, 
         deleted: false 
       },
@@ -31,8 +27,8 @@ export const tasksSlice = createSlice({
         id: nanoid(), 
         title: 'Three', 
         description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.', 
-        start: dayjs('2023-01-30'), 
-        end: dayjs('2023-02-01'), 
+        start: '2023-01-30', 
+        end: '2023-02-01', 
         completed: false, 
         deleted: false 
       },

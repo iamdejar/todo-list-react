@@ -21,21 +21,29 @@ export const Filters = () => {
   }
 
   const onStartDateChange = (e) => {
-    dispatch(setFilter({
-      filter: 'StartDate', 
-      titleValue: '',
-      startDateValue: e.target.value,
-      endDateValue: '',
-    }))
+    if (e.target.value) {
+      dispatch(setFilter({
+        filter: 'StartDate', 
+        titleValue: '',
+        startDateValue: e.target.value,
+        endDateValue: '',
+      }))
+    } else {
+      dispatch(setFilter({filter: 'All'}))
+    }
   }
 
   const onEndDateChange = (e) => {
-    dispatch(setFilter({
-      filter: 'EndDate', 
-      titleValue: '',
-      startDateValue: '',
-      endDateValue: e.target.value,
-    }))
+    if (e.target.value) {
+      dispatch(setFilter({
+        filter: 'EndDate', 
+        titleValue: '',
+        startDateValue: '',
+        endDateValue: e.target.value,
+      }))
+    } else {
+      dispatch(setFilter({filter: 'All'}))
+    }
   }
 
   return (

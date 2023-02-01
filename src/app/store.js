@@ -1,10 +1,19 @@
 import { configureStore } from "@reduxjs/toolkit";
-import tasksReucer from './reducer'
+import tasksReducer from './reducer';
+
+const preloadedState = localStorage.getItem('todoState') 
+                      ? JSON.parse(localStorage.getItem('todoState'))
+                      : {};
 
 const store = configureStore({
   reducer: {
-    tasks: tasksReucer
-  }
+    tasks: tasksReducer
+  },
+  preloadedState,
+})
+
+store.subscribe(() => {
+  localStorage.setItem('todoState', JSON.stringify(store.getState()))
 })
 
 export { store }

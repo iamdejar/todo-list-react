@@ -33,7 +33,10 @@ export const tasksSlice = createSlice({
         deleted: false 
       },
     ],
-    activeFilter: 'All'
+    activeFilter: {
+      filter: 'All',
+      value: '',
+    }
   },
   reducers: {
     addTask: (state, action) => {
@@ -87,7 +90,8 @@ export const tasksSlice = createSlice({
     },
 
     setFilter: (state, action) => {
-      state.activeFilter = action.payload
+      state.activeFilter.filter = action.payload.filter;
+      state.activeFilter.value = action.payload.value;
     }
   }
   

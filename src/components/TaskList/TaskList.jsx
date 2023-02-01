@@ -5,15 +5,15 @@ import { Task } from '../Task/Task';
 export const TaskList = (props) => {
 
   const state = useSelector(state => state.tasks);
-  const sortArr = [...state.tasks];
 
   const FILTER_FUNCTIONS = {
     'All': state.tasks.filter(() => true),
     'Active': state.tasks.filter((task) => !task.completed),
     'Completed': state.tasks.filter((task) => task.completed),
+    'Title': state.tasks.filter((task) => task.title.toLowerCase().startsWith(state.activeFilter.value)),
   }
 
-  const tasksToRender = FILTER_FUNCTIONS[state.activeFilter]
+  const tasksToRender = FILTER_FUNCTIONS[state.activeFilter.filter]
     .map((task) => (
       <Task 
         id={task.id} 

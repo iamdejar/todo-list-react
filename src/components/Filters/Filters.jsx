@@ -1,51 +1,62 @@
 import styles from './Filters.module.scss';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setFilter } from '../../app/reducer';
 
 export const Filters = () => {
 
   const dispatch = useDispatch();
+  const filterState = useSelector(state => state.tasks.activeFilter.value)
 
   return (
-    <div className={styles.row}>
-      <div className={styles.buttons}>
-        <button
-          onClick={() => dispatch(setFilter('All'))}
-          className={styles.item}
-        >
-          All
-        </button>
-        <button 
-          onClick={() => dispatch(setFilter('Active'))}
-          className={styles.item}
-        >
-          Active
-        </button>
-        <button 
-          onClick={() => dispatch(setFilter('Completed'))}
-          className={styles.item}
-        >
-          Completed
-        </button>
+    <div className={styles.filters}>
+      <h2 className={styles.title}>Filter tasks by</h2>
+      <div className={styles.row}>
+        <div className={styles.columnTitle}>status</div>
+        <div className={styles.columnTitle}>title</div>
+        <div className={styles.columnTitle}>start date</div>
+        <div className={styles.columnTitle}>end date</div>
       </div>
+      <div className={styles.row}>
+        <div className={styles.buttons}>
+          <button
+            onClick={() => dispatch(setFilter({filter: 'All'}))}
+            className={styles.button}
+          >
+            All
+          </button>
+          <button 
+            onClick={() => dispatch(setFilter({filter: 'Active'}))}
+            className={styles.button}
+          >
+            Active
+          </button>
+          <button 
+            onClick={() => dispatch(setFilter({filter: 'Completed'}))}
+            className={styles.button}
+          >
+            Completed
+          </button>
+        </div>
 
-      <select 
-        className={styles.item}
-        onChange={(e) => dispatch(setFilter(e.target.value))}
-      >
-        <option value='start-default'>Default</option>
-        <option value='startAscending'>Ascending</option>
-        <option value='startDescending'>Descending</option>
-      </select>
+        <label>
+          <div className={styles.label}>start with:</div>
+          <input 
+            className={styles.input} 
+            type='text' 
+            value={filterState}
+            onChange={(e) => dispatch(setFilter({filter: 'Title', value: e.target.value.toLowerCase()}))}
+          />
+        </label>
 
-      <select 
-        className={styles.item}
-        onChange={(e) => dispatch(setFilter(e.target.value))}
-      >
-        <option value='end-default'>Default</option>
-        <option value='end-ascending'>Ascending</option>
-        <option value='end-descending'>Descending</option>
-      </select>
+        <label>
+          <div className={styles.label}>not earlier:</div>
+          <input className={styles.input} type='date' />
+        </label>
+        <label>
+          <div className={styles.label}>not earlier:</div>
+          <input className={styles.input} type='date' />
+        </label>
+      </div>
     </div>
   )
 }

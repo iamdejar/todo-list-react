@@ -55,9 +55,9 @@ export const TaskList = () => {
   }
 
   const filteredTasks = FILTER_FUNCTIONS[state.activeFilter.filter];
+  const tasksWithPagination = filteredTasks.filter((task, index) => index < state.pagination);
 
-  const tasksToRender = filteredTasks
-    .filter((task, index) => index < state.pagination)
+  const tasksToRender = tasksWithPagination
     .map((task) => (
       <Task 
         id={task.id} 
@@ -74,7 +74,7 @@ export const TaskList = () => {
   if (filteredTasks.length > 0) {
     return (
       <>
-        <div>Showing {state.pagination} / {state.tasks.length} tasks</div>
+        <div>Showing {tasksWithPagination.length} / {filteredTasks.length} tasks</div>
         <ul className={styles.list}>
     
           {tasksToRender}

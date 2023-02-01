@@ -2,7 +2,7 @@ import styles from './Task.module.scss';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { completeTask, deleteTask } from '../../app/reducer';
+import { changeTaskCompleted, deleteTask } from '../../app/reducer';
 
 const dayjs = require('dayjs');
 require('dayjs/locale/ru');
@@ -13,7 +13,7 @@ export const Task = (props) => {
   const dispatch = useDispatch();
 
   const onChange = () => {
-    dispatch(completeTask(props.id))
+    dispatch(changeTaskCompleted(props.id))
   }
 
   return (

@@ -14,7 +14,7 @@ export const Trash = () => {
     return () => {
       dispatch(setFilter({filter: 'All'}))
     }
-  })
+  }, [])
 
   return (
     <>

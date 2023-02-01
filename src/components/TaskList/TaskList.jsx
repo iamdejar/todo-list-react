@@ -36,7 +36,7 @@ export const TaskList = () => {
     return () => {
       document.removeEventListener('scroll', scrollHandler)
     }
-  })
+  }, [])
 
   const FILTER_FUNCTIONS = {
     All: state.tasks.filter((task) => !task.deleted),

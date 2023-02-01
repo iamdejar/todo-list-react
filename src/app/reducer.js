@@ -2,23 +2,21 @@ import { createSlice } from "@reduxjs/toolkit";
 import { nanoid } from "nanoid";
 import { initialState } from "./initial-state";
 
+const PAGINATION_SIZE = 15;
+
 export const tasksSlice = createSlice({
   name: 'tasks',
   initialState: initialState,
   reducers: {
     addTask(state, action) {
-      let newTask = {
-        id: nanoid(), 
-        title: action.payload.title, 
-        description: action.payload.desk, 
-        start: action.payload.start, 
-        end: action.payload.end, 
+      state.tasks.push({
+        id: nanoid(),
         completed: false, 
-        deleted: false 
-      };
-
-      state.tasks.push(newTask);
+        deleted: false,
+        ...action.payload
+      });
     },
+
     editTask(state, action) {
 
       state.tasks = state.tasks.map(task => {
@@ -32,10 +30,9 @@ export const tasksSlice = createSlice({
         }
         return task
       })
-
     },
 
-    completeTask(state, action) {
+    changeTaskCompleted(state, action) {
       state.tasks = state.tasks.map(task => {
 
         if (action.payload === task.id) {
@@ -43,7 +40,6 @@ export const tasksSlice = createSlice({
         }
         return task
       })
-
     },
 
     deleteTask(state, action) {
@@ -57,26 +53,24 @@ export const tasksSlice = createSlice({
     },
 
     setFilter(state, action) {
-      state.activeFilter.filter = action.payload.filter;
-      state.activeFilter.titleValue = action.payload.titleValue;
-      state.activeFilter.startDateValue = action.payload.startDateValue;
-      state.activeFilter.endDateValue = action.payload.endDateValue;
-      state.pagination = 15;
+      state.activeFilter = {...action.payload};
+
+      state.pagination = PAGINATION_SIZE;
     },
 
-    loadTasks(state, action) {
-      if (state.pagination + 15 < state.tasks.length) {
-        state.pagination = state.pagination + 15
+    loadTasks(state) {
+      if (state.pagination + PAGINATION_SIZE < state.tasks.length) {
+        state.pagination = state.pagination + PAGINATION_SIZE
       } else {
         state.pagination = state.tasks.length
       }
     },
 
-    clearDeleted(state, action) {
+    clearDeleted(state) {
       state.tasks = state.tasks.filter((task) => !task.deleted)
     }
   }
 })
 
-export const { addTask, editTask, completeTask, deleteTask, setFilter, loadTasks, clearDeleted } = tasksSlice.actions;
+export const { addTask, editTask, changeTaskCompleted, deleteTask, setFilter, loadTasks, clearDeleted } = tasksSlice.actions;
 export default tasksSlice.reducer;

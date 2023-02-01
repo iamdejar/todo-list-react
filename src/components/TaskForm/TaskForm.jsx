@@ -42,7 +42,7 @@ export const TaskForm = (props) => {
       if (props.toedit === undefined) {
         dispatch(props.action({
           title: titleValue, 
-          desk: descValue,
+          description: descValue,
           start: startValue,
           end: endValue,
         }));
@@ -50,7 +50,7 @@ export const TaskForm = (props) => {
         dispatch(props.action({
           id: props.toedit.id,
           title: titleValue, 
-          desk: descValue,
+          description: descValue,
           start: startValue,
           end: endValue,
         }));
@@ -91,12 +91,14 @@ export const TaskForm = (props) => {
         className={styles.inputDate} 
         value={startValue} 
         onChange={onStartDateChange}
+        required
       />
       <input 
         type="date" 
         className={styles.inputDate} 
         value={endValue} 
         onChange={onEndDateChange}
+        required
       />
 
       <input type='submit' value='Save' className='button'/>

@@ -1,6 +1,8 @@
 import styles from './Filters.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFilter } from '../../app/reducer';
+import { useEffect } from 'react';
+import {initialFilters} from '../../shared/initial-state'
 
 const dayjs = require('dayjs');
 require('dayjs/locale/ru');
@@ -9,41 +11,26 @@ dayjs.locale('ru');
 export const Filters = () => {
 
   const dispatch = useDispatch();
-  const filterState = useSelector(state => state.tasks.activeFilter);
+  const filterState = useSelector(state => state.tasks);
 
+  useEffect(() => {
+  }, [filterState])
   const onTitleChange = (e) => {
     dispatch(setFilter({
-      filter: 'Title', 
-      titleValue: e.target.value.toLowerCase(),
-      startDateValue: '',
-      endDateValue: '',
+      title: e.target.value.toLowerCase(),
     }))
   }
 
   const onStartDateChange = (e) => {
-    if (e.target.value) {
-      dispatch(setFilter({
-        filter: 'StartDate', 
-        titleValue: '',
-        startDateValue: e.target.value,
-        endDateValue: '',
-      }))
-    } else {
-      dispatch(setFilter({filter: 'All'}))
-    }
+    dispatch(setFilter({
+      start: e.target.value,
+    }))
   }
 
   const onEndDateChange = (e) => {
-    if (e.target.value) {
-      dispatch(setFilter({
-        filter: 'EndDate', 
-        titleValue: '',
-        startDateValue: '',
-        endDateValue: e.target.value,
-      }))
-    } else {
-      dispatch(setFilter({filter: 'All'}))
-    }
+    dispatch(setFilter({
+      end: e.target.value,
+    }))
   }
 
   return (
@@ -61,19 +48,19 @@ export const Filters = () => {
       <div className={styles.row}>
         <div className={styles.buttons}>
           <button
-            onClick={() => dispatch(setFilter({filter: 'All'}))}
+            onClick={() => dispatch(setFilter(initialFilters))}
             className={styles.button}
           >
             All
           </button>
           <button 
-            onClick={() => dispatch(setFilter({filter: 'Active'}))}
+            onClick={() => dispatch(setFilter({completed: false, deleted: false}))}
             className={styles.button}
           >
             Active
           </button>
           <button 
-            onClick={() => dispatch(setFilter({filter: 'Completed'}))}
+            onClick={() => dispatch(setFilter({completed: true, deleted: false}))}
             className={styles.button}
           >
             Completed
@@ -85,7 +72,7 @@ export const Filters = () => {
           <input 
             className={styles.input} 
             type='text' 
-            value={filterState.titleValue}
+            value={filterState.title}
             onChange={onTitleChange}
             placeholder='Title'
           />
@@ -100,7 +87,7 @@ export const Filters = () => {
           />
         </label>
         <label>
-          <div className={styles.label}>not earlier:</div>
+          <div className={styles.label}>not later:</div>
           <input 
             className={styles.input} 
             type='date' 

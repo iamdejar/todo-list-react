@@ -8,51 +8,51 @@ const dayjs = require('dayjs');
 require('dayjs/locale/ru');
 dayjs.locale('ru');
 
-export const Task = (props) => {
+export const Task = ({id, title, start, end, deleted, completed, description}) => {
 
   const dispatch = useDispatch();
 
   const onChange = () => {
-    dispatch(changeTaskCompleted(props.id))
+    dispatch(changeTaskCompleted(id))
   }
 
   return (
-    <li className={classNames(styles.row, props.deleted === true ? styles.deleted : null)}>
+    <li className={classNames(styles.row, deleted === true ? styles.deleted : null)}>
       <label className={styles.label}>
         <input 
           type='checkbox' 
-          id={props.id} 
-          key={props.id}
-          checked={props.completed === true ? true : false}
+          id={id} 
+          key={id}
+          checked={completed === true ? true : false}
           onChange={onChange}/>
 
-        <div className={styles.title}>{props.title}</div>
+        <div className={styles.title}>{title}</div>
       </label>
 
       <div className={styles.date}>
         <strong>Start</strong>
-        <span>{dayjs(props.start).format('D MMM YYYY')} г.</span>
+        <span>{dayjs(start).format('D MMM YYYY')} г.</span>
       </div>
       <div className={styles.date}>
         <strong>End</strong>
-        <span>{dayjs(props.end).format('D MMM YYYY')} г.</span>
+        <span>{dayjs(end).format('D MMM YYYY')} г.</span>
       </div>
 
-      <Link to='/task' className='button' state={{ id: props.id }}>edit</Link>
+      <Link to='/task' className='button' state={{ id: id }}>edit</Link>
       <button 
         type='button'
         className='button' 
         onClick={() => {
           const isDelete = window.confirm('Вы действительно хотите удалить задачу?');
           if (isDelete === true) {
-            dispatch(deleteTask(props.id)) 
+            dispatch(deleteTask(id)) 
           }
         }}>
           delete
         </button>
 
       <div className={styles.description}>
-        {props.desc}
+        {description}
       </div>
     </li>
   )

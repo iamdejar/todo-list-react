@@ -8,9 +8,6 @@ const dayjs = require('dayjs');
 require('dayjs/locale/ru');
 dayjs.locale('ru');
 
-const isSameOrAfter = require('dayjs/plugin/isSameOrAfter');
-dayjs.extend(isSameOrAfter);
-
 export const TaskList = () => {
 
   const dispatch = useDispatch();
@@ -21,7 +18,7 @@ export const TaskList = () => {
     const scrollBottom = e.target.documentElement.scrollHeight - e.target.documentElement.scrollTop - window.innerHeight;
 
     if (scrollBottom < 50) {
-      setLoading('true')
+      setLoading(true)
     }
   }
 
@@ -38,36 +35,14 @@ export const TaskList = () => {
     }
   }, [])
 
-  const FILTER_FUNCTIONS = {
-    All: state.tasks.filter((task) => !task.deleted),
-
-    Active: state.tasks.filter((task) => !task.completed),
-
-    Completed: state.tasks.filter((task) => task.completed),
-
-    Title: state.tasks.filter((task) => task.title.toLowerCase().startsWith(state.activeFilter.titleValue)),
-
-    StartDate: state.tasks.filter((task) => dayjs(task.start).isSameOrAfter(state.activeFilter.startDateValue)),
-
-    EndDate: state.tasks.filter((task) => dayjs(task.end).isSameOrAfter(state.activeFilter.endDateValue)),
-
-    Deleted: state.tasks.filter((task) => task.deleted),
-  }
-
-  const filteredTasks = FILTER_FUNCTIONS[state.activeFilter.filter];
+  const filteredTasks = state.filteredTasks;
   const tasksWithPagination = filteredTasks.filter((task, index) => index < state.pagination);
 
   const tasksToRender = tasksWithPagination
     .map((task) => (
       <Task 
-        id={task.id} 
+        {...task}
         key={task.id}
-        title={task.title} 
-        desc={task.description}
-        start={task.start}
-        end={task.end}
-        completed={task.completed}
-        deleted={task.deleted}
       />
     ));
 

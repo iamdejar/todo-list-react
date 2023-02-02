@@ -1,12 +1,18 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current } from "@reduxjs/toolkit";
 import { nanoid } from "nanoid";
-import { initialState } from "./initial-state";
+import { initialState } from "../shared/initial-state";
+import { PAGINATION_SIZE } from "../shared/lib";
+import { filter } from "../features/filters";
 
-const PAGINATION_SIZE = 15;
+const preloadedTasks = localStorage.getItem('todoState') ? JSON.parse(localStorage.getItem('todoState')) : undefined;
+const preloadedState = preloadedTasks
+                      ? {...initialState, tasks: preloadedTasks, filteredTasks: preloadedTasks}
+                      : initialState;
+
 
 export const tasksSlice = createSlice({
-  name: 'tasks',
-  initialState: initialState,
+  name: 'tasks-reducer',
+  initialState: preloadedState,
   reducers: {
     addTask(state, action) {
       state.tasks.push({
@@ -15,6 +21,8 @@ export const tasksSlice = createSlice({
         deleted: false,
         ...action.payload
       });
+      state.filteredTasks = filter(state.tasks, state.activeFilter);
+
     },
 
     editTask(state, action) {
@@ -30,6 +38,7 @@ export const tasksSlice = createSlice({
         }
         return task
       })
+      state.filteredTasks = filter(state.tasks, state.activeFilter);
     },
 
     changeTaskCompleted(state, action) {
@@ -40,6 +49,7 @@ export const tasksSlice = createSlice({
         }
         return task
       })
+      state.filteredTasks = filter(state.tasks, state.activeFilter);
     },
 
     deleteTask(state, action) {
@@ -50,10 +60,12 @@ export const tasksSlice = createSlice({
         }
         return task
       })
+      state.filteredTasks = filter(state.tasks, state.activeFilter);
     },
 
     setFilter(state, action) {
-      state.activeFilter = {...action.payload};
+      state.activeFilter = {...state.activeFilter, ...action.payload};
+      state.filteredTasks = filter(state.tasks, state.activeFilter);
 
       state.pagination = PAGINATION_SIZE;
     },

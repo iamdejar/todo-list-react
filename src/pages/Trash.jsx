@@ -3,16 +3,17 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setFilter, clearDeleted } from "../app/reducer";
 import { useEffect } from "react";
+import { initialFilters } from "../shared/initial-state";
 
 export const Trash = () => {
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(setFilter({filter: 'Deleted'}))
+    dispatch(setFilter({deleted: true}))
 
     return () => {
-      dispatch(setFilter({filter: 'All'}))
+      dispatch(setFilter(initialFilters))
     }
   }, [])
 

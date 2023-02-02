@@ -23,7 +23,7 @@ export const Task = ({id, title, start, end, deleted, completed, description}) =
           type='checkbox' 
           id={id} 
           key={id}
-          checked={completed === true ? true : false}
+          checked={Boolean(completed)}
           onChange={onChange}/>
 
         <div className={styles.title}>{title}</div>

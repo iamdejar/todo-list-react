@@ -8,60 +8,28 @@ export const TaskForm = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [titleValue, setTitleValue] = useState(
-    props.toedit === undefined ? '' : props.toedit.title
-  );
-  const [descValue, setDescValue] = useState(
-    props.toedit === undefined ? '' : props.toedit.description
-  );
-  const [startValue, setStartValue] = useState(
-    props.toedit === undefined ? '' : props.toedit.start
-  );
-  const [endValue, setEndValue] = useState(
-    props.toedit === undefined ? '' : props.toedit.end
-  );
-
-  const onTitleChange = (e) => {
-    setTitleValue(e.target.value);
-  }
-  const onDescChange = (e) => {
-    setDescValue(e.target.value);
-  }
-  const onStartDateChange = (e) => {
-    setStartValue(e.target.value);
-  }
-  const onEndDateChange = (e) => {
-    setEndValue(e.target.value);
-  }
+  const [formValues, setformValues] = useState({
+    title: props.toedit === undefined ? '' : props.toedit.title,
+    description: props.toedit === undefined ? '' : props.toedit.description,
+    start: props.toedit === undefined ? '' : props.toedit.start,
+    end: props.toedit === undefined ? '' : props.toedit.end,
+  })
 
   const onSubmit = (e) => {
     e.preventDefault();
 
-    if (titleValue.length) {
+    if (formValues.title.length) {
 
       if (props.toedit === undefined) {
-        dispatch(props.action({
-          title: titleValue, 
-          description: descValue,
-          start: startValue,
-          end: endValue,
-        }));
+        dispatch(props.action(formValues));
       } else {
         dispatch(props.action({
-          id: props.toedit.id,
-          title: titleValue, 
-          description: descValue,
-          start: startValue,
-          end: endValue,
+          ...formValues,
+          id: props.toedit.id
         }));
       }
       
-
-      setTitleValue('');
-      setDescValue('');
-      setStartValue('');
-      setEndValue('');
-
+      setformValues({title: '', description: '', start: '', end: ''})
       navigate('/');
     }
   }
@@ -74,30 +42,38 @@ export const TaskForm = (props) => {
       <input 
         type="text" 
         className={styles.input} 
-        value={titleValue} 
-        onChange={onTitleChange}
+        value={formValues.title || ''} 
+        onChange={(e) => {
+          setformValues({title: e.target.value})
+        }}
         placeholder='Title'
         required
       />
       <textarea 
         type="text" 
         className={styles.input} 
-        value={descValue} 
-        onChange={onDescChange}
+        value={formValues.description} 
+        onChange={(e) => {
+          setformValues({description: e.target.value})
+        }}
         placeholder='Description'
       />
       <input 
         type="date" 
         className={styles.inputDate} 
-        value={startValue} 
-        onChange={onStartDateChange}
+        value={formValues.start} 
+        onChange={(e) => {
+          setformValues({start: e.target.value})
+        }}
         required
       />
       <input 
         type="date" 
         className={styles.inputDate} 
-        value={endValue} 
-        onChange={onEndDateChange}
+        value={formValues.end} 
+        onChange={(e) => {
+          setformValues({end: e.target.value})
+        }}
         required
       />
 

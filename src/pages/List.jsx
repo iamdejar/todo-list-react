@@ -1,32 +1,23 @@
-import { TaskList } from '../widgets/TaskList/TaskList';
-import { Filters } from '../widgets/Filters/Filters';
-import { Button } from '../shared/ui/Button/Button';
-import { useSelector } from 'react-redux';
+import { TaskList } from "../widgets/TaskList/TaskList";
+import { Filters } from "../widgets/Filters/Filters";
+import { Button } from "../shared/ui/Button/Button";
+import { useSelector } from "react-redux";
 
 export const List = () => {
-  const state = useSelector(state => state.tasks);
-  const filteredTasks = state.filteredTasks.filter(task => !task.deleted);
+  const state = useSelector((state) => state.tasks);
+  const filteredTasks = state.filteredTasks.filter((task) => !task.deleted);
 
   return (
     <>
-    <div className='top-buttons'>
+      <div className="top-buttons">
+        <Button href="/task">Add a new task</Button>
 
-      <Button
-        href="/task"
-      >
-        Add a new task
-      </Button>
+        <Button href="/trash">View deleted tasks</Button>
+      </div>
 
-      <Button
-        href="/trash"
-      >
-        View deleted tasks
-      </Button>
-    </div>
+      <Filters />
 
-    <Filters/>    
-
-    <TaskList tasks={filteredTasks}/>
+      <TaskList tasks={filteredTasks} />
     </>
-  )
-}
+  );
+};

@@ -2,7 +2,7 @@ import styles from './TaskList.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { Task } from '../../shared/ui/Task/Task';
 import { useEffect, useState } from 'react';
-import { loadTasks, changeTaskCompleted, deleteTask } from '../../app/store/reducer';
+import { loadTasks, changeTaskCompleted, deleteTask } from '../../app/store/slice';
 import dayjs from 'dayjs';
 import 'dayjs/locale/ru'
 

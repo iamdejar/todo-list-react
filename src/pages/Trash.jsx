@@ -1,6 +1,6 @@
 import { TaskList } from "../widgets/TaskList/TaskList";
 import { useDispatch, useSelector } from "react-redux";
-import { clearDeleted } from "../app/store/reducer";
+import { clearDeleted } from "../app/store/slice";
 import { Button } from "../shared/ui/Button/Button";
 
 export const Trash = () => {

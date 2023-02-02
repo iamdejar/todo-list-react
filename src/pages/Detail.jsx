@@ -1,5 +1,5 @@
 import { TaskForm } from "../widgets/TaskForm/TaskForm";
-import { addTask, editTask } from "../app/store/reducer";
+import { addTask, editTask } from "../app/store/slice";
 import { useLocation } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { Button } from "../shared/ui/Button/Button";

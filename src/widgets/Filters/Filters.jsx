@@ -1,6 +1,6 @@
 import styles from './Filters.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { setFilter } from '../../app/store/reducer';
+import { setFilter } from '../../app/store/slice';
 import { useEffect } from 'react';
 import {initialFilters} from '../../shared/initial-state';
 import { Button } from '../../shared/ui/Button/Button';

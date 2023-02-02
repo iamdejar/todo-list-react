@@ -1,5 +1,5 @@
-import { TaskList } from '../components/TaskList/TaskList';
-import { Filters } from '../components/Filters/Filters';
+import { TaskList } from '../widgets/TaskList/TaskList';
+import { Filters } from '../widgets/Filters/Filters';
 import { Button } from '../shared/ui/Button/Button';
 import { useSelector } from 'react-redux';
 

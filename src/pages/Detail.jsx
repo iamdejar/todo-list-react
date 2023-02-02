@@ -1,5 +1,5 @@
-import { TaskForm } from "../components/TaskForm/TaskForm";
-import { addTask, editTask } from "../app/reducer";
+import { TaskForm } from "../widgets/TaskForm/TaskForm";
+import { addTask, editTask } from "../app/store/reducer";
 import { useLocation } from 'react-router-dom';
 import { useSelector } from "react-redux";
 import { Button } from "../shared/ui/Button/Button";
@@ -30,7 +30,7 @@ export const DetailTask = () => {
       >
         Назад
       </Button>
-      
+
       <TaskForm action={action} toedit={taskToEdit} />
     </>
   )

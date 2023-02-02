@@ -1,20 +1,13 @@
 import styles from './Task.module.scss';
 import classNames from 'classnames';
 import { useDispatch } from 'react-redux';
-import { changeTaskCompleted, deleteTask } from '../../app/reducer';
-import { Button } from '../../shared/ui/Button/Button';
+import { Button } from '../Button/Button';
 
 import dayjs from 'dayjs';
 import 'dayjs/locale/ru';
 dayjs.locale('ru');
 
-export const Task = ({id, title, start, end, deleted, completed, description}) => {
-
-  const dispatch = useDispatch();
-
-  const onChange = () => {
-    dispatch(changeTaskCompleted(id))
-  }
+export const Task = ({id, title, start, end, deleted, completed, description, onDelete, onChange}) => {
 
   return (
     <li className={classNames(styles.row, deleted === true ? styles.deleted : null)}>
@@ -46,12 +39,7 @@ export const Task = ({id, title, start, end, deleted, completed, description}) =
       </Button>
 
       <Button
-        onClick={() => {
-        const isDelete = window.confirm('Вы действительно хотите удалить задачу?');
-        if (isDelete === true) {
-          dispatch(deleteTask(id)) 
-        }
-      }}
+      onClick={onDelete}
       >
         delete
       </Button>

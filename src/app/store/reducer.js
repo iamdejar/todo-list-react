@@ -1,8 +1,8 @@
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { nanoid } from "nanoid";
-import { initialState } from "../shared/initial-state";
-import { PAGINATION_SIZE } from "../shared/lib";
-import { filter } from "../features/filters";
+import { initialState } from "../../shared/initial-state";
+import { PAGINATION_SIZE } from "../../shared/lib";
+import { filter } from "../../features/filters";
 
 const preloadedTasks = localStorage.getItem('todoState') ? JSON.parse(localStorage.getItem('todoState')) : undefined;
 const preloadedState = preloadedTasks

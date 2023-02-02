@@ -1,8 +1,6 @@
-import { TaskList } from "../components/TaskList/TaskList";
+import { TaskList } from "../widgets/TaskList/TaskList";
 import { useDispatch, useSelector } from "react-redux";
-import { setFilter, clearDeleted } from "../app/reducer";
-import { useEffect } from "react";
-import { initialFilters } from "../shared/initial-state";
+import { clearDeleted } from "../app/store/reducer";
 import { Button } from "../shared/ui/Button/Button";
 
 export const Trash = () => {

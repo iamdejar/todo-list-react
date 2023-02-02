@@ -1,14 +1,17 @@
 import './App.scss'
+import { Provider } from 'react-redux';
 import { Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { List } from './pages/List';
-import { DetailTask } from './pages/Detail';
-import { Trash } from './pages/Trash';
+import { List } from '../../pages/List';
+import { DetailTask } from '../../pages/Detail';
+import { Trash } from '../../pages/Trash';
+import { store } from '../store';
 
-const App = () => {
+export const App = () => {
 
   return (
 
+    <Provider store={store}>
     <BrowserRouter>
 
         <div className="todolist-body">
@@ -24,9 +27,7 @@ const App = () => {
           </Suspense>
           
         </div>
-    </BrowserRouter>
+    </BrowserRouter></Provider>
     
   );
 }
-
-export default App;

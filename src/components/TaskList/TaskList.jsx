@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Task } from '../Task/Task';
 import { useEffect, useState } from 'react';
 import { loadTasks } from '../../app/reducer';
+import dayjs from 'dayjs';
+import 'dayjs/locale/ru'
 
-const dayjs = require('dayjs');
-require('dayjs/locale/ru');
 dayjs.locale('ru');
 
-export const TaskList = () => {
+export const TaskList = ({tasks}) => {
 
   const dispatch = useDispatch();
   const state = useSelector(state => state.tasks);
@@ -35,8 +35,8 @@ export const TaskList = () => {
     }
   }, [])
 
-  const filteredTasks = state.filteredTasks;
-  const tasksWithPagination = filteredTasks.filter((task, index) => index < state.pagination);
+  // const filteredTasks = state.filteredTasks;
+  const tasksWithPagination = tasks.filter((task, index) => index < state.pagination);
 
   const tasksToRender = tasksWithPagination
     .map((task) => (
@@ -46,16 +46,16 @@ export const TaskList = () => {
       />
     ));
 
-  if (filteredTasks.length > 0) {
+  if (tasks.length > 0) {
     return (
       <>
-        <div>Showing {tasksWithPagination.length} / {filteredTasks.length} tasks</div>
+        <div>Showing {tasksWithPagination.length} / {tasks.length} tasks</div>
         <ul className={styles.list}>
     
           {tasksToRender}
     
         </ul>
-        {tasksWithPagination.length === filteredTasks.length ? <div className={styles.listEnd}>Конец списка</div> : null}
+        {tasksWithPagination.length === tasks.length ? <div className={styles.listEnd}>Конец списка</div> : null}
       </>
     )
   }

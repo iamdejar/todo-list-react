@@ -1,5 +1,5 @@
-const dayjs = require('dayjs');
-require('dayjs/locale/ru');
+import dayjs from 'dayjs';
+import 'dayjs/locale/ru';
 dayjs.locale('ru');
 
 const isSameOrAfter = require('dayjs/plugin/isSameOrAfter');

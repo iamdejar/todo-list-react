@@ -1,8 +1,8 @@
-import { Link } from "react-router-dom";
 import { TaskForm } from "../components/TaskForm/TaskForm";
 import { addTask, editTask } from "../app/reducer";
 import { useLocation } from 'react-router-dom';
 import { useSelector } from "react-redux";
+import { Button } from "../shared/ui/Button/Button";
 
 export const DetailTask = () => {
 
@@ -24,7 +24,13 @@ export const DetailTask = () => {
   
   return (
     <>
-      <Link to='/' className='button mb20'>Назад</Link>
+      <Button
+        href='/'
+        className='mb20'
+      >
+        Назад
+      </Button>
+      
       <TaskForm action={action} toedit={taskToEdit} />
     </>
   )

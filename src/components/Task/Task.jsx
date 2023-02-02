@@ -1,11 +1,11 @@
 import styles from './Task.module.scss';
 import classNames from 'classnames';
-import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { changeTaskCompleted, deleteTask } from '../../app/reducer';
+import { Button } from '../../shared/ui/Button/Button';
 
-const dayjs = require('dayjs');
-require('dayjs/locale/ru');
+import dayjs from 'dayjs';
+import 'dayjs/locale/ru';
 dayjs.locale('ru');
 
 export const Task = ({id, title, start, end, deleted, completed, description}) => {
@@ -38,18 +38,23 @@ export const Task = ({id, title, start, end, deleted, completed, description}) =
         <span>{dayjs(end).format('D MMM YYYY')} г.</span>
       </div>
 
-      <Link to='/task' className='button' state={{ id: id }}>edit</Link>
-      <button 
-        type='button'
-        className='button' 
+      <Button
+        href='/task'
+        linkState={{ id: id }}
+      >
+        edit
+      </Button>
+
+      <Button
         onClick={() => {
-          const isDelete = window.confirm('Вы действительно хотите удалить задачу?');
-          if (isDelete === true) {
-            dispatch(deleteTask(id)) 
-          }
-        }}>
-          delete
-        </button>
+        const isDelete = window.confirm('Вы действительно хотите удалить задачу?');
+        if (isDelete === true) {
+          dispatch(deleteTask(id)) 
+        }
+      }}
+      >
+        delete
+      </Button>
 
       <div className={styles.description}>
         {description}

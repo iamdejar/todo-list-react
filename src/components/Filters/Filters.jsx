@@ -2,10 +2,11 @@ import styles from './Filters.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
 import { setFilter } from '../../app/reducer';
 import { useEffect } from 'react';
-import {initialFilters} from '../../shared/initial-state'
+import {initialFilters} from '../../shared/initial-state';
+import { Button } from '../../shared/ui/Button/Button';
 
-const dayjs = require('dayjs');
-require('dayjs/locale/ru');
+import dayjs from 'dayjs';
+import 'dayjs/locale/ru';
 dayjs.locale('ru');
 
 export const Filters = () => {
@@ -47,24 +48,24 @@ export const Filters = () => {
 
       <div className={styles.row}>
         <div className={styles.buttons}>
-          <button
+          <Button
             onClick={() => dispatch(setFilter(initialFilters))}
-            className={styles.button}
+            size='small'
           >
             All
-          </button>
-          <button 
+          </Button>
+          <Button 
             onClick={() => dispatch(setFilter({completed: false, deleted: false}))}
-            className={styles.button}
+            size='small'
           >
             Active
-          </button>
-          <button 
+          </Button>
+          <Button 
             onClick={() => dispatch(setFilter({completed: true, deleted: false}))}
-            className={styles.button}
+            size='small'
           >
             Completed
-          </button>
+          </Button>
         </div>
 
         <label>

@@ -79,7 +79,8 @@ export const tasksSlice = createSlice({
     },
 
     clearDeleted(state) {
-      state.tasks = state.tasks.filter((task) => !task.deleted)
+      state.tasks = state.tasks.filter((task) => !task.deleted);
+      state.filteredTasks = filter(state.tasks, state.activeFilter);
     }
   }
 })

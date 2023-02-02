@@ -1,19 +1,32 @@
 import { TaskList } from '../components/TaskList/TaskList';
-import { Link } from 'react-router-dom';
 import { Filters } from '../components/Filters/Filters';
+import { Button } from '../shared/ui/Button/Button';
+import { useSelector } from 'react-redux';
 
 export const List = () => {
+  const state = useSelector(state => state.tasks);
+  const filteredTasks = state.filteredTasks.filter(task => !task.deleted);
 
   return (
     <>
     <div className='top-buttons'>
-      <Link to="/task" className='button'>Add a new task</Link>
-      <Link to="/trash" className='button'>View deleted tasks</Link>
+
+      <Button
+        href="/task"
+      >
+        Add a new task
+      </Button>
+
+      <Button
+        href="/trash"
+      >
+        View deleted tasks
+      </Button>
     </div>
 
     <Filters/>    
 
-    <TaskList/>
+    <TaskList tasks={filteredTasks}/>
     </>
   )
 }

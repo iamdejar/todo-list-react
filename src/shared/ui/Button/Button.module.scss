@@ -1,0 +1,27 @@
+.button {
+  width: fit-content;
+  border: 1px solid royalblue;
+  background: #fff;
+
+  color: #000;
+  text-decoration: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
+  &--normal {
+    padding: 10px 20px;
+    border-radius: 10px;
+  
+    font-size: 16px;
+  }
+
+  &--small {
+  padding: 5px;
+  border-radius: 5px;
+
+  font-size: 12px;
+  }
+}

@@ -2,6 +2,7 @@ import styles from './TaskForm.module.scss';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { Button } from '../../shared/ui/Button/Button';
 
 export const TaskForm = (props) => {
 
@@ -14,6 +15,17 @@ export const TaskForm = (props) => {
     start: props.toedit === undefined ? '' : props.toedit.start,
     end: props.toedit === undefined ? '' : props.toedit.end,
   })
+
+
+  const getController = (name) => {
+    return (e) => {
+      setformValues(prev => {
+        const newFormValues = {...prev};
+        newFormValues[name] = e.target.value;
+        return newFormValues
+      })
+    }
+  }
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -42,10 +54,8 @@ export const TaskForm = (props) => {
       <input 
         type="text" 
         className={styles.input} 
-        value={formValues.title || ''} 
-        onChange={(e) => {
-          setformValues({title: e.target.value})
-        }}
+        value={formValues.title} 
+        onChange={getController('title')}
         placeholder='Title'
         required
       />
@@ -53,31 +63,27 @@ export const TaskForm = (props) => {
         type="text" 
         className={styles.input} 
         value={formValues.description} 
-        onChange={(e) => {
-          setformValues({description: e.target.value})
-        }}
+        onChange={getController('description')}
         placeholder='Description'
       />
       <input 
         type="date" 
         className={styles.inputDate} 
         value={formValues.start} 
-        onChange={(e) => {
-          setformValues({start: e.target.value})
-        }}
+        onChange={getController('start')}
         required
       />
       <input 
         type="date" 
         className={styles.inputDate} 
         value={formValues.end} 
-        onChange={(e) => {
-          setformValues({end: e.target.value})
-        }}
+        onChange={getController('end')}
         required
       />
 
-      <input type='submit' value='Save' className='button'/>
+      <Button>
+        Save
+      </Button>
     </form>
   )
 }
